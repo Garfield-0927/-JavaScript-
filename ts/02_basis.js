@@ -8,4 +8,5 @@ function sum(a, b) {
     return a + b;
 }
 sum(123, 456);
-sum(123, "456");
+// sum(123,"456");
+sum(123, 456, 789);
