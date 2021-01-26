@@ -1,1 +1,1 @@
-console.log("Hello" + "TpyeScript");
+// console.log("Hello" + "TpyeScript");
