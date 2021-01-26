@@ -133,7 +133,33 @@ c = false		// OK
 
 
 
+##### 2.5 数组的类型指定
+
+```typescript
+// 指定数组均为number类型
+let numArr : number[] = [1,2,3]
+
+// 指定数组均为string类型
+let strArr : string[] = ['string','hello']
+
+// 指定数组中的混合类型
+let Arr : (number|string)[] = ["string",1,2,"hello"]
+
+// 指定数组中的对象类型
+// 方法一： type alias 类型别名
+// 方法二： class 类
+type Beauty = {
+  name: string,
+  age: number
+}
+let beauties2 : Beauty[] = [{name:"Rachel", age:18},{name:"Cephass", age:21}]
+
+class Cute{
+  name: string;
+  age: number
+}
+let cutes : Cute[] = [{name:"Rachel", age:18},{name:"Cephass", age:21}]
+```
 
 
-### 3、类型注解（annotation）和类型推断（inference）
 
