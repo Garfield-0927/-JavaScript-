@@ -39,40 +39,40 @@
 
 
 // 类的继承
-class Animal{
-  name: string;
-  age: number;
+// class Animal{
+//   name: string;
+//   age: number;
 
-    constructor(name: string, age: number){
-    this.name = name;
-    this.age = age;
-  }
+//     constructor(name: string, age: number){
+//     this.name = name;
+//     this.age = age;
+//   }
 
-  sayHello(){
-    console.log("hahaha");
+//   sayHello(){
+//     console.log("hahaha");
     
-  }
-}
+//   }
+// }
 
-class Dog extends Animal{
-  sayHello(){
-    console.log("wang wang wang!!!");
+// class Dog extends Animal{
+//   sayHello(){
+//     console.log("wang wang wang!!!");
     
-  }
-}
+//   }
+// }
 
-class Cat extends Animal{
-  sayHello(){
-    console.log("miao~~~~~");
-  }
-}
+// class Cat extends Animal{
+//   sayHello(){
+//     console.log("miao~~~~~");
+//   }
+// }
 
-const dog = new Dog("rango", 2)
-const cat = new Cat("Rach", 4)
-dog.sayHello()
-console.log(dog);
-cat.sayHello()
-console.log(cat);
+// const dog = new Dog("rango", 2)
+// const cat = new Cat("Rach", 4)
+// dog.sayHello()
+// console.log(dog);
+// cat.sayHello()
+// console.log(cat);
 
 
 

@@ -165,27 +165,190 @@ let cutes : Cute[] = [{name:"Rachel", age:18},{name:"Cephass", age:21}]
 
 
 
-### 3、接口interface
+### 3、类（class）
+
+#### 3.1 类的定义
+
+​		使用class关键字来定义一个类，一个类中，既有方法，也有属性。
+
+​		属性：
+
+		- 实例属性：直接定义，需要通过对象的实例去访问
+		- 静态属性：使用static开头定义的属性（类属性），直接通过类去访问
+		- 只读属性：使用readonly开头定义的属性，表示无法修改
 
 ```typescript
-interface Beauty{
+class Person{
+  name: string = "garfield";
+  static age: number = 18;
+  readonly sex: number = 1;
+
+  sayHello(){
+    console.log("hello, my name is "+this.name);
+  }
+}
+const per = new Person();
+console.log(Person.age);    // 18
+console.log(per.name);      // garfield
+per.sayHello()              // hello, my name is garfield
+```
+
+
+
+#### 3.2 构造函数
+
+​		在编写类的时候，我们通常不能把属性给写死，不然new出来的对象的属性都是一模一样的，就是去了类存在的意义，所以我们需要构造函数constructor，每当我们new一个对象时，类中的构造函数就会立刻执行。而构造函数可以接受参数，我们通过接收得参数，以及this指针来设置我们对象中的属性值。
+
+```typescript
+class Dog{
   name: string;
   age: number;
-  bust ?: number;   // bust 是可选值
+
+  // 构造函数
+  constructor(name: string, age: number){
+    this.name = name;
+    this.age = age;
+  }
+
+
+  bark(){
+    alert("wang wang wang!!!")
+  }
 }
 
-let beauty = {
-  name: "Rach",
-  age: 18,
-  bust: 21,
-}
-
-let getbeauty = (beauty:Beauty)=>{
-  console.log(beauty.name + " is a beauty");
-  console.log(beauty.name + " is " + beauty.age + " years old ");
-  beauty.bust&&console.log(beauty.name+"'s bust is:" + beauty.bust);
-}
-
-getbeauty(beauty)
+const dog = new Dog("zhangsan", 2);
+const dog2 = new Dog("lisi", 4);
+console.log(dog);	// Dog {name: "zhangsan", age: 2}	
+console.log(dog2);	// Dog {name: "lisi", age: 4}
 ```
+
+
+
+#### 3.3 类的继承
+
+​		首先我们举一个很常见的例子。我们把狗和猫都看作是一个类，狗类里面有 age 和 name 属性，有 sayhello 方法， 猫类里面也有相同的方法和属性，如果不用继承，我们两个class中都要写age和name属性以及sayhello方法，这样代码重复性高，看起来也比较冗长，所以引入继承。
+
+​		一个类继承一个类，用关键字 ***extend*** ，被继承的那个类叫父类，继承于别人的类叫子类，**子类拥有父类中的所有属性以及方法**，在子类中，可以定义属于子类自己的方法，也可以**重写父类中的方法**，**重写不会影响到父类中的方法**！
+
+```typescript
+// 创建一个父类
+class Animal{
+  name: string;
+  age: number;
+
+    constructor(name: string, age: number){
+    this.name = name;
+    this.age = age;
+  }
+
+  sayHello(){
+    console.log("hahaha");
+    
+  }
+}
+// 子类
+class Dog extends Animal{
+  sayHello(){
+    console.log("wang wang wang!!!");
+    
+  }
+}
+// 子类
+class Cat extends Animal{
+  sayHello(){
+    console.log("miao~~~~~");
+  }
+}
+
+const dog = new Dog("rango", 2)
+const cat = new Cat("Rach", 4)
+dog.sayHello()		// wang wang wang!!!
+console.log(dog);  	// Dog {name: "rango", age: 2}
+cat.sayHello()		// miao~~~~~
+console.log(cat);	// Cat {name: "Rach", age: 4}
+```
+
+
+
+### 4、接口（interface）
+
+#### 4.1 接口介绍
+
+​		简单来说，接口有两个作用。
+
+- 作为一种数据类型，就类似number，string，可以进行类型指定
+- 用来约束类中的属性以及方法
+
+#### 4.2 定义接口
+
+​		通过关键字`interface`来定义接口。
+
+```typescript
+interface myInterface{
+  name: string;
+  age: number;
+  sex: number;
+  birth ?: string;
+
+  run():void;
+}
+```
+
+​		上面这个接口中，表示了myInterface类型中有name，age等属性以及run这个方法。
+
+​		接下来我们可以指定某一个变量为myInterface类型，并运用里面的方法或者访问属性。
+
+```typescript
+let boy : myInterface;
+boy = {
+  name: "garfield",
+  age: 18,
+  sex: 0,
+  
+  run(){
+    console.log("i'm running");
+  }
+}
+boy.run()   // i'm running
+```
+
+#### 4.3 实现接口
+
+​		上面提及了接口作为一种数据类型来使用，这里就介绍接口的另外一个作用——用来约束类中的属性以及方法。
+
+```typescript
+interface Animal{
+  name: string;
+  age: number;
+  sex: number;
+  birth ?: string;
+
+  bark():void
+}
+
+class Dog implements Animal{
+  name: string;
+  age: number;
+  sex: number;
+  birth ?: string;
+
+  constructor(name:string, age:number, sex:number, birth?:string){
+    this.name = name;
+    this.age = age;
+    this.sex = sex;
+    if(birth) 
+      this.birth = birth;
+  }
+  
+  bark(){
+    console.log("wangwangwang!!");
+  }
+}
+
+const dog = new Dog("sangchen", 21, 0)
+console.log(dog.name+" "+dog.age);    // sangchen 21
+dog.bark()      // wangwangwang!!
+```
+
+
 
