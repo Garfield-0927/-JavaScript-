@@ -352,3 +352,108 @@ dog.bark()      // wangwangwang!!
 
 
 
+### 5、属性的封装
+
+#### 5.1 属性修饰符
+
+​		类中的属性有3种修饰符，它们分别起着不一样的效果
+
+- public（default）：表示该属性是公有属性，随便在哪里都能进行访问以及修改
+- private：表示该属性是私有属性，只能在该类的内部进行访问以及修改，在外部需要通过类中的getter和setter方法进行访问以及修改。在继承时，私有类也不会继承。
+- protect：表示该属性是被保护的属性，同样只能在类的内部进行访问以及修改，但是与private不同的是在继承时，该属性会被继承至子类当中，也是作为被保护类。
+
+
+
+#### 5.2 Ts中的getter与setter方法
+
+​		与java类似，typescript中为了类中属性的安全，也同样有getter与setter机制。具体使用方法如下。
+
+```typescript
+class Person{
+  private _name: string;
+  private _age: number;
+
+  constructor(name:string, age:number){
+    this._name = name;
+    this._age = age;
+  }
+
+  get name(){
+    return this._name;
+  }
+  set name(name:string){
+    this._name = name;
+  }
+
+  get age(){
+    return this._age;
+  }
+  set age(age: number){
+    if(age>0){
+      this._age = age;
+    }
+  }
+
+}
+
+const per = new Person("gar",18)
+console.log(per.name);		// gar
+console.log(per.age);		// 18
+// 修改内部私有属性
+per.name = "field"
+per.age = 17
+
+
+```
+
+​		有人可能会说，你这样也可以通过`person.age`以及`person.name`来进行修改和访问啊。但实际上只要把类中get和set后面的变量名写的稍复杂些，就没那么简单了，而且在getter与setter方法中，我们可以对想修改的值进行判断以及处理，这样就加强了程序的健壮性。
+
+
+
+### 6、 泛型
+
+#### 6.1 泛型的作用
+
+​		在定义函数或者是类的时候，如果遇到类型不明确就可以使用泛型。那这时候就有帅气的小伙伴问了，我用any不行嘛？当然可以，但是用any的弊端在于使用了any就相当于关闭了typescript的类型判断，那typescript的作用又何在呢，JavaScript它不像嘛？所以泛型的作用就是在定义函数或者是类的时候，遇到类型不明确，就使用泛型。
+
+
+
+#### 6.2 泛型的使用
+
+​		通过**<>**（左右尖括号），来使用泛型。例如下面这个例子：
+
+```typescript
+function fn<T>(a:T):T{
+  return a;
+}
+let res = fn<string>("garfield")  // 指定泛型为string
+let res2 = fn<number>(123456)   // 指定泛型为number
+```
+
+​		这个类型T就是我声明的泛型，fn函数表示接受一个类型为T的参数，返回值也是T类型的。
+
+
+
+​		此外，泛型可以同时指定多个。
+
+```typescript
+function fn2<T, K>(a:T, b:K):T{
+  console.log(b);
+  return a;
+}
+
+let res3 = fn2<number, string>(18, "garfield")
+```
+
+
+
+​		还可以指定继承特定接口或者特定类的泛型。用关键词extends，表示泛型T必须是接口Inter的子类或者是实现类。
+
+```typescript
+function fn3<T extends Inter>(a:T):number{
+  return a.length
+}
+let res4 = fn3("garfield")		// 因为string中有length属性
+console.log(res4);    //  8
+```
+
