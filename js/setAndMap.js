@@ -68,3 +68,97 @@
 // // 差集
 // const difference = new Set([...a].filter(item => !b.has(item)));
 // console.log(...difference); // 2
+
+
+
+
+
+// ==================   Map  ======================
+// const item = [
+//   ['name', "gar"],
+//   ['school', "hust"]
+// ]
+
+// const m1 = new Map(item)
+// console.log(m1);    // Map(2) { 'name' => 'gar', 'school' => 'hust' }
+
+
+// const m2 = new Map();
+// m2.set('name', 'gar');
+// m2.set('school', 'hust');
+// console.log(m2);
+// const item = [
+//   ['name', "gar"],
+//   ['school', "hust"]
+// ]
+// const m3 = new Map(item);
+// console.log(m3.get('name'));    // gar
+// console.log(m3.get('school'));  // hust
+
+// const m4 = new Map();
+// const a = [1,2];
+// const b = [1,2];
+// m4.set(['a'], 'aaa');
+// console.log(m4.get(['a']));   // undefined
+// m4.set(a,'array1');
+// m4.set(b,'array2');
+// console.log(m4.get(a));       // array1
+// console.log(m4.get(b));       // array2
+
+// const item = [
+//   ['name', "gar"],
+//   ['school', "hust"]
+// ]
+
+// let m = new Map(item);
+
+// for (const key of m.keys()) {
+//   console.log(key);
+// }
+// // name
+// // school
+// for (const value of m.values()) {
+//   console.log(value);
+// }
+// // gar
+// // hust
+// for (const item of m.entries()) {
+//   console.log(item[0], item[1]);
+// }
+// // name gar
+// // school hust
+// for (const item of m) {
+//   console.log(item[0], item[1]);
+// }
+// // name gar
+// // school hust
+// m.forEach((value, key)=>console.log(value, key))
+// // gar name
+// // hust school
+
+
+// const m1 = new Map()
+//   .set('height', 180)
+//   .set({name: 'gar', age: 18}, ['abc']);
+// console.log([...m1]);   // [ [ 'height', 180 ], [ { name: 'gar', age: 18 }, [ 'abc' ] ] ]
+
+
+// function Map2Obj(map){
+//   let obj = {};
+//   for (const [key, value] of map) {
+//     obj[key] = value;
+//   }
+//   return obj;
+// }
+// const item = [
+//   [{address:{
+//     country: "china",
+//     province: "shanghai"
+//   }, name: 'zjh'}, 'is a huster']
+// ]
+// const m = new Map(item);
+// const obj = Map2Obj(m);
+// console.log(obj);   // { '[object Object]': 'is a huster' }
+
+let obj = {"a":1, "b":2};
+console.log(Object.entries(obj));
